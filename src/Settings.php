@@ -20,7 +20,7 @@ class Settings implements JsonSerialization
     /**
      * @param stdClass|array<string, mixed> $settings
      */
-    public function __construct(array|stdClass $settings = [])
+    public function __construct($settings = [])
     {
         foreach ((array) $settings as $property => $value) {
             $this->set($property, $value);
@@ -35,7 +35,10 @@ class Settings implements JsonSerialization
         return new Settings($any);
     }
 
-    public function set(string $name, mixed $value): void
+    /**
+     * @param mixed $value
+     */
+    public function set(string $name, $value): void
     {
         try {
             JsonString::encode($value);
@@ -49,7 +52,11 @@ class Settings implements JsonSerialization
         $this->settings[$name] = $value;
     }
 
-    public function get(string $name, mixed $default = null): mixed
+    /**
+     * @param mixed $default
+     * @return mixed|null
+     */
+    public function get(string $name, $default = null)
     {
         if ($this->has($name)) {
             return $this->settings[$name];
@@ -100,7 +107,10 @@ class Settings implements JsonSerialization
         return $default;
     }
 
-    public function getRequired(string $name): mixed
+    /**
+     * @return mixed
+     */
+    public function getRequired(string $name)
     {
         if ($this->has($name)) {
             return $this->settings[$name];
