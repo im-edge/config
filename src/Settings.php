@@ -68,7 +68,7 @@ class Settings implements JsonSerialization
 
     /**
      * @param array<string, mixed> $default
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function getArray(string $name, array $default = []): array
     {
@@ -80,7 +80,7 @@ class Settings implements JsonSerialization
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function requireArray(string $name): array
     {
