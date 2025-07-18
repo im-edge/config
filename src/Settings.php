@@ -29,6 +29,7 @@ class Settings implements JsonSerialization
 
     /**
      * @param stdClass|array<string, mixed> $any
+     * @return static|Settings
      */
     public static function fromSerialization($any): Settings
     {
@@ -86,7 +87,7 @@ class Settings implements JsonSerialization
         return (array) $this->getRequired(($name));
     }
 
-    public function getAsSettings(string $name, Settings $default = null): Settings
+    public function getAsSettings(string $name, ?Settings $default = null): Settings
     {
         if ($this->has($name)) {
             if (is_array($this->settings[$name]) || $this->settings[$name] instanceof stdClass) {
